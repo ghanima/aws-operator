@@ -253,7 +253,7 @@ func (g *Guest) WaitForNodesReady(ctx context.Context, expectedNodes int) error 
 
 		return nil
 	}
-	b := backoff.NewConstant(backoff.LongMaxWait, backoff.LongMaxInterval)
+	b := backoff.NewConstant(20*time.Minute, 30*time.Second)
 	n := backoff.NewNotifier(g.logger, ctx)
 
 	err := backoff.RetryNotify(o, b, n)
